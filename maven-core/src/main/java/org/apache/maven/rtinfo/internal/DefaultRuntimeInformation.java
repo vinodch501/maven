@@ -34,12 +34,13 @@ import org.eclipse.aether.version.Version;
 import org.eclipse.aether.version.VersionConstraint;
 import org.eclipse.aether.version.VersionScheme;
 
+import static org.apache.maven.utils.Precondition.isNotEmpty;
+
 /**
  * Provides information about the current Maven runtime.
  */
 @Component( role = RuntimeInformation.class )
-public class DefaultRuntimeInformation
-    implements RuntimeInformation
+public class DefaultRuntimeInformation implements RuntimeInformation
 {
 
     @Requirement
@@ -64,7 +65,7 @@ public class DefaultRuntimeInformation
                 else
                 {
                     logger.warn(
-                        "Could not locate " + resource + " on classpath, Maven runtime information not available" );
+                            "Could not locate " + resource + " on classpath, Maven runtime information not available" );
                 }
             }
             catch ( IOException e )
@@ -115,7 +116,7 @@ public class DefaultRuntimeInformation
         try
         {
             String mavenVersion = getMavenVersion();
-            Precondition.isTrue(  Precondition.isNotEmpty( mavenVersion ), "Could not determine current Maven version" );
+            Precondition.isTrue( isNotEmpty( mavenVersion ), "Could not determine current Maven version" );
 
             current = versionScheme.parseVersion( mavenVersion );
         }
