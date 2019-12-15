@@ -19,16 +19,6 @@ package org.apache.maven.cli;
  * under the License.
  */
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeTrue;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-
 import java.io.File;
 
 import org.apache.commons.cli.ParseException;
@@ -42,6 +32,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
+
+import static org.junit.Assert.*;
+import static org.junit.Assume.assumeTrue;
+import static org.mockito.Mockito.*;
 
 public class MavenCliTest
 {
