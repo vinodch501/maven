@@ -19,6 +19,15 @@ package org.apache.maven.lifecycle.internal;
  * under the License.
  */
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.LifeCyclePluginAnalyzer;
 import org.apache.maven.lifecycle.Lifecycle;
@@ -29,19 +38,11 @@ import org.apache.maven.model.InputLocation;
 import org.apache.maven.model.InputSource;
 import org.apache.maven.model.Plugin;
 import org.apache.maven.model.PluginExecution;
+import org.apache.maven.shared.utils.StringUtils;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
-import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * <strong>NOTE:</strong> This class is not part of any public api and can be changed or deleted without prior notice.
@@ -136,7 +137,15 @@ public class DefaultLifecyclePluginAnalyzer
 
         List<Lifecycle> lifecycles = new ArrayList<>( defaultLifeCycles.getLifeCycles() );
 
-        lifecycles.sort( Comparator.comparing( Lifecycle::getId ) );
+        Collections.sort( lifecycles, new Comparator<Lifecycle>()
+        {
+
+            public int compare( Lifecycle l1, Lifecycle l2 )
+            {
+                return l1.getId().compareTo( l2.getId() );
+            }
+
+        } );
 
         return lifecycles;
     }
