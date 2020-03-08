@@ -540,7 +540,7 @@ public class DefaultModelBuilder
         }
 
         Model model;
-        if ( pomFile == null ) 
+        if ( pomFile == null )
         {
             model = getModelFromCache( modelSource, request.getModelCache() );
             if ( model != null )
